@@ -1,0 +1,29 @@
+{
+  "dataset": "NSIDC SMAP L4",
+  "variable": "sm_surface",
+  "description": "Top layer soil moisture (0-5 cm)",
+  "units": "m3 m-3",
+  "boundingBox": {
+    "west": -112.29926877,
+    "south": 40.46334075,
+    "east": -112.06152903,
+    "north": 40.55593193
+  },
+  "points": [
+    {
+      "latitude": 40.54835891723633,
+      "longitude": -112.2666015625,
+      "soilMoisture": 0.06562808901071548
+    },
+    {
+      "latitude": 40.54835891723633,
+      "longitude": -112.1732406616211,
+      "soilMoisture": 0.16868595778942108
+    },
+    {
+      "latitude": 40.54835891723633,
+      "longitude": -112.07987976074219,
+      "soilMoisture": 0.18040470778942108
+    }
+  ]
+}

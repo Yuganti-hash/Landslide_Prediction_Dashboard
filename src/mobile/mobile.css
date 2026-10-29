@@ -1,0 +1,349 @@
+/* ==========================================================================
+   MOBILE-ONLY 3D DEM VIEWER STYLES
+   Isolated stylesheet - Does NOT leak into or alter desktop dashboard styles.
+   ========================================================================== */
+
+.mobile-viewer-root {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #03080f;
+  color: #e2e8f0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+/* ── Minimalist Mobile Header ────────────────────────────────────────── */
+.mobile-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: max(10px, env(safe-area-inset-top)) 16px 10px 16px;
+  background: linear-gradient(180deg, rgba(3, 8, 15, 0.92) 0%, rgba(3, 8, 15, 0.7) 70%, transparent 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.mobile-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: auto;
+}
+
+.mobile-app-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-app-title::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #00e676;
+  box-shadow: 0 0 8px #00e676;
+}
+
+.mobile-viewer-subtitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ── HUD Stats Pill ─────────────────────────────────────────────────── */
+.mobile-hud-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(6, 20, 36, 0.75);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.70rem;
+  color: #94a3b8;
+  pointer-events: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-fps-val {
+  font-weight: 700;
+  color: #00e676;
+}
+
+.mobile-fps-val.low {
+  color: #ff3366;
+}
+
+.mobile-fps-val.mid {
+  color: #ffaa00;
+}
+
+/* ── 3D Canvas Container ─────────────────────────────────────────────── */
+.mobile-canvas-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  outline: none;
+}
+
+.mobile-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* ── Loading Overlay ─────────────────────────────────────────────────── */
+.mobile-loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: rgba(3, 8, 15, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.mobile-spinner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 212, 255, 0.15);
+  border-top-color: #00d4ff;
+  animation: mobile-spin 0.9s linear infinite;
+}
+
+@keyframes mobile-spin {
+  to { transform: rotate(360deg); }
+}
+
+.mobile-loading-text {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+.mobile-loading-sub {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Mobile Control Bar (Bottom Floating Dock) ───────────────────────── */
+.mobile-control-bar {
+  position: absolute;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6, 17, 31, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 30px;
+  padding: 6px 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 212, 255, 0.15);
+}
+
+.mobile-ctrl-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: #94a3b8;
+  padding: 8px 12px;
+  min-height: 44px;
+  min-width: 44px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  touch-action: manipulation;
+}
+
+.mobile-ctrl-btn:active,
+.mobile-ctrl-btn.active {
+  background: rgba(0, 212, 255, 0.18);
+  border-color: #00d4ff;
+  color: #00d4ff;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.mobile-ctrl-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Floating Side Utilities (Legend + Performance details) ─────────── */
+.mobile-legend-pill {
+  position: absolute;
+  left: 12px;
+  bottom: calc(max(16px, env(safe-area-inset-bottom)) + 66px);
+  z-index: 15;
+  background: rgba(6, 17, 31, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  font-size: 0.65rem;
+}
+
+.mobile-legend-title {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #00d4ff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mobile-legend-gradient-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #061a40 0%,
+    #00a8cc 13%,
+    #16a35a 24%,
+    #ffeb3b 46%,
+    #f39200 63%,
+    #783806 79%,
+    #ffffff 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-legend-range {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  color: #94a3b8;
+  font-size: 0.60rem;
+}
+
+/* ── Performance Details Drawer / Modal ──────────────────────────────── */
+.mobile-perf-panel {
+  position: absolute;
+  top: calc(max(10px, env(safe-area-inset-top)) + 52px);
+  right: 12px;
+  z-index: 25;
+  background: rgba(3, 10, 20, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  color: #cbd5e1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 170px;
+}
+
+.mobile-perf-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.mobile-perf-label {
+  color: #64748b;
+  text-transform: uppercase;
+  font-size: 0.60rem;
+}
+
+.mobile-perf-val {
+  font-weight: 700;
+  color: #00d4ff;
+}
+
+/* ── Error Banner ────────────────────────────────────────────────────── */
+.mobile-error-banner {
+  position: absolute;
+  inset: 20px;
+  z-index: 35;
+  background: rgba(18, 5, 10, 0.95);
+  border: 1px solid #ff3366;
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.mobile-error-title {
+  color: #ff3366;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.mobile-error-msg {
+  font-size: 0.78rem;
+  color: #fca5a5;
+  font-family: 'JetBrains Mono', monospace;
+  max-width: 320px;
+}
+
+.mobile-retry-btn {
+  background: rgba(255, 51, 102, 0.18);
+  border: 1px solid #ff3366;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.78rem;
+  min-height: 44px;
+  touch-action: manipulation;
+}
